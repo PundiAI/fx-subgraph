@@ -1,0 +1,29 @@
+name: Deploy Subgraph
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Install graph-cli
+        run: npm install -g @graphprotocol/graph-cli
+
+      - name: deploy subgraph
+        env:
+          GRAPH_AUTH_KEY: ${{ secrets.GRAPH_AUTH_KEY }}
+          GRAPH_NODE_URL: ${{ secrets.GRAPH_NODE_URL }}
+          GRAPH_IPFS_URL: ${{ secrets.GRAPH_IPFS_URL }}
+          TESTNET_GRAPH_NODE_URL: ${{ secrets.TESTNET_GRAPH_NODE_URL }}
+          TESTNET_GRAPH_IPFS_URL: ${{ secrets.TESTNET_GRAPH_IPFS_URL }}
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh
