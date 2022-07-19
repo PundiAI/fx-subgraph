@@ -3,7 +3,7 @@
 ### Fork [fx-subgraph](https://github.com/functionx/fx-subgraph)
 
 > How do fork a repo？
-> 
+>
 > please see github fork a repo [docs](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
 
 ```shell
@@ -13,9 +13,11 @@ cd fx-subgraph
 
 ### Add yourself subgraph space
 
-requirements
-* subgraph name does not exist
-* subgraph name must contain only a-z, A-Z, 0-9, '-' and '_'
+* subgraph_name
+    * must contain only a-z, A-Z, 0-9, '-' and '_'
+    * cannot be repeated
+* network
+    * your can be set to mainnet or testnet
 
 ```shell
 mkdir <subgraph name>
@@ -23,10 +25,16 @@ mkdir <subgraph name>
 touch <subgraph name>/<subgraph name>.json
 
 cat << EOF > <subgraph name>/<subgraph name>.json
-{
-  "subgraph_name":"<subgraph name>",
-  "github_repo":"https://github.com/*/*.git"
-}
+[
+  {
+    "subgraph_name": "fx-swap",
+    "network": "testnet",
+    "version": "v1.0.0",
+    "last_version": "v0.0.0",
+    "branch": "main",
+    "github_repo": "https://github.com/*/*.git"
+  }
+]
 EOF
 ```
 
@@ -38,10 +46,24 @@ mkdir fx-swap
 touch fx-swap/fx-swap.json
 
 cat <<EOF > fx-swap/fx-swap.json
-{
-  "subgraph_name":"fx-swap",
-  "github_repo":"https://github.com/functionx/fx-swap.git"
-}
+[
+  {
+    "subgraph_name": "fx-swap",
+    "network": "mainnet",
+    "version": "v1.0.0",
+    "last_version": "v0.0.0",
+    "branch": "main",
+    "github_repo": "https://github.com/functionx/fx-swap.git"
+  }
+  {
+    "subgraph_name": "fx-swap",
+    "network": "testnet",
+    "version": "v1.0.0",
+    "last_version": "v0.0.0",
+    "branch": "test",
+    "github_repo": "https://github.com/functionx/fx-swap.git"
+  }
+]
 EOF
 ```
 
@@ -49,5 +71,7 @@ EOF
 
 > How to crate a pull request？
 >
-> please see github Creating a pull request [docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+> please see github Creating a pull
+>
+request [docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 
