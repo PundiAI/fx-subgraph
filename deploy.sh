@@ -11,6 +11,14 @@ for subgraph in ${changeSubgraph}; do
     echo "invalid subgraph: ${subgraph}"
     exit 1
   fi
+  subgraphNumber=$(cat "${subgraph}" | jq -r '. | length')
+  if [ ${subgraphNumber} -gt 2 ]; then
+    echo "can only contain one testnet and mainnet subgraph: ${subgraph}"
+    exit 1
+  fi
+  if [ ${subgraphNumber} -le 0 ]; then
+    continue
+  fi
   for info in $(cat "${subgraph}" | jq -r '.[] | @base64'); do
     _jq() {
       echo ${info} | base64 --decode | jq -r ${1}

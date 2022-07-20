@@ -29,6 +29,8 @@ cd fx-subgraph
 
 > The update will only be performed if the version is not the same as the last version.
 
+> The `<subgraph name>.json` contains arrays of length less than or equal to 2; A test network and mainnet subgraph
+
 ```shell
 mkdir <subgraph name>
 
