@@ -43,7 +43,7 @@ for subgraph in ${changeSubgraph}; do
     fi
     branch=$(_jq '.branch')
     curl --connect-timeout 3 -s https://raw.githubusercontent.com/"${githubRepo:19}"/"${branch}"/package.json | jq .
-    git clone -b "${branch}" "${githubRepo}"
+    git clone -b "${branch}" "${githubRepo}" "${subgraphName}"
     cd "${subgraphName}"
 
     network="$(_jq '.network')"
