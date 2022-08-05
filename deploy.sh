@@ -43,10 +43,8 @@ for subgraph in ${changeSubgraph}; do
     fi
     branch=$(_jq '.branch')
     curl --connect-timeout 3 -s https://raw.githubusercontent.com/"${githubRepo:19}"/"${branch}"/package.json | jq .
-    git clone "${githubRepo}"
+    git clone -b "${branch}" "${githubRepo}"
     cd "${subgraphName}"
-    git checkout "${branch}"
-    git pull
 
     network="$(_jq '.network')"
     if [ "${network}" == "mainnet" ]; then
