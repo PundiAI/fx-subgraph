@@ -67,6 +67,9 @@ for subgraph in ${changeSubgraph}; do
       npm run codegen
     fi
     npx graph build
+    if [[ ${lastVersion} == "v0.0.0" && ${version} == "v0.0.1" ]]; then
+        npx graph create --node "${graphNodeUrl}" subgraphFX2
+    fi
     npx graph deploy --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" "${subgraphName}"
   done
 done
