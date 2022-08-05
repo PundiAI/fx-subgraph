@@ -5,6 +5,10 @@ set -e -x
 
 changeSubgraph=$(find . -name '*.json' -not -path "./node_modules/*" | grep '[_a-zA-Z0-9-]*.\/[_a-zA-Z0-9-]*.\.json')
 
+if [ ! -d "./build" ]; then
+  mkdir build
+fi
+
 for subgraph in ${changeSubgraph}; do
   subgraphName=$(dirname "${subgraph:2}")
   if [[ ! -d "${subgraphName}" || "${subgraphName}.json" != "$(basename "${subgraph}")" ]]; then
@@ -33,19 +37,6 @@ for subgraph in ${changeSubgraph}; do
       echo "no update ${subgraph}"
       continue
     fi
-    githubRepo=$(_jq '.github_repo')
-    if [ "${githubRepo:0:18}" != "https://github.com" ]; then
-        echo "invalid github repository URL: ${githubRepo}"
-        continue
-    fi
-    if [ ${githubRepo:0-4:4} == ".git" ]; then
-      githubRepo="${githubRepo%????}"
-    fi
-    branch=$(_jq '.branch')
-    curl --connect-timeout 3 -s https://raw.githubusercontent.com/"${githubRepo:19}"/"${branch}"/package.json | jq .
-    git clone -b "${branch}" "${githubRepo}" "${subgraphName}"
-    cd "${subgraphName}"
-
     network="$(_jq '.network')"
     if [ "${network}" == "mainnet" ]; then
       graphNodeUrl="${GRAPH_NODE_URL}"
@@ -57,11 +48,25 @@ for subgraph in ${changeSubgraph}; do
       graphAuthKey="${TESTNET_GRAPH_AUTH_KEY}"
     else
       echo "invalid network: $network"
-      exit 1
+      continue
     fi
+    githubRepo=$(_jq '.github_repo')
+    if [ "${githubRepo:0:18}" != "https://github.com" ]; then
+        echo "invalid github repository URL: ${githubRepo}"
+        continue
+    fi
+    if [ ${githubRepo:0-4:4} == ".git" ]; then
+      githubRepo="${githubRepo%????}"
+    fi
+    branch=$(_jq '.branch')
+    curl --connect-timeout 3 -s https://raw.githubusercontent.com/"${githubRepo:19}"/"${branch}"/package.json | jq .
+    cd build
+    git clone -b "${branch}" "${githubRepo}" "${subgraphName}"
+    cd "${subgraphName}"
     echo "update ${subgraph}: form ${lastVersion} to ${version} in the ${network}"
     graph auth --studio "${graphAuthKey}"
     graph codegen && graph build
     graph deploy --studio "${subgraphName}" --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" --debug
+    cd ..
   done
 done
