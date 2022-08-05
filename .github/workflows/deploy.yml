@@ -14,9 +14,6 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install graph-cli
-        run: npm install -g @graphprotocol/graph-cli
-
       - name: deploy subgraph
         env:
           GRAPH_AUTH_KEY: ${{ secrets.GRAPH_AUTH_KEY }}
