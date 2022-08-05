@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -o errexit -o pipefail
-set -e -x
 
 changeSubgraph=$(find . -name '*.json' -not -path "./node_modules/*" | grep '[_a-zA-Z0-9-]*.\/[_a-zA-Z0-9-]*.\.json')
 
@@ -38,10 +37,12 @@ for subgraph in ${changeSubgraph}; do
       graphNodeUrl="${GRAPH_NODE_URL}"
       ipfsUrl="${GRAPH_IPFS_URL}"
       graphAuthKey="${GRAPH_AUTH_KEY}"
+      graphNodePubUrl="https://graph-node.functionx.io"
     elif [ "${network}" == "testnet" ]; then
       graphNodeUrl="${TESTNET_GRAPH_NODE_URL}"
       ipfsUrl="${TESTNET_GRAPH_IPFS_URL}"
       graphAuthKey="${TESTNET_GRAPH_AUTH_KEY}"
+      graphNodePubUrl="https://testnet-graph-node.functionx.io"
     else
       echo "invalid network: $network"
       continue
@@ -70,6 +71,13 @@ for subgraph in ${changeSubgraph}; do
     if [[ ${lastVersion} == "v0.0.0" && ${version} == "v0.0.1" ]]; then
         npx graph create --node "${graphNodeUrl}" subgraphFX2
     fi
-    npx graph deploy --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" "${subgraphName}"
+    npx graph deploy --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" "${subgraphName}" > /dev/null 2>&1
+
+    echo "Deploying to Graph node"
+    echo "Deployed to $graphNodePubUrl/subgraphs/name/${subgraphName}/graphql"
+    echo "Subgraph endpoints:"
+    echo "Queries (HTTP): $graphNodePubUrl/subgraphs/name/${subgraphName}"
+    echo "Subscriptions (WS): $graphNodePubUrl/ws/subgraphs/name/${subgraphName}"
+    cd ..
   done
 done
