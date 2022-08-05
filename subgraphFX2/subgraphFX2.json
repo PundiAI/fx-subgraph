@@ -1,0 +1,10 @@
+[
+  {
+    "subgraph_name": "subgraphFX2",
+    "network": "mainnet",
+    "version": "v0.0.1",
+    "last_version": "v0.0.0",
+    "branch": "main",
+    "github_repo": "https://github.com/IsseiBlockchain/FXSwap-Mainnet-Subgraph.git"
+  }
+]
