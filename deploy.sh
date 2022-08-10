@@ -69,7 +69,7 @@ for subgraph in ${changeSubgraph}; do
     fi
     npx graph build
     if [[ ${lastVersion} == "v0.0.0" && ${version} == "v0.0.1" ]]; then
-        npx graph create --node "${graphNodeUrl}" subgraphFX2
+        npx graph create --node "${graphNodeUrl}" ${subgraphName}
     fi
     npx graph deploy --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" "${subgraphName}" > /dev/null 2>&1
 
