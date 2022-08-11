@@ -112,7 +112,7 @@ dataSources:
 
 1. We'll review the pull request and merge.
 2. Github action workflows execute deploy.
-3. You can view the execution results in Github action.
+3. You can view the execution results in github [action](https://github.com/FunctionX/fx-subgraph/actions).
 
 ### Subgraph endpoints
 
