@@ -79,6 +79,29 @@ cat <<EOF > template/template.json
 EOF
 ```
 
+#### ⚠️About subgraph.yaml in your project
+
+You have to set startBlock explicitly! You can find the deployment height of the corresponding contract in the block explorer, otherwise we will refuse to deploy subgraph.
+
+`dataSources -> source -> startBlock`
+
+e.g.
+
+```
+...
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: testnet
+    source:
+      address: '0x0000000000000000000000000000000000000000'
+      abi: Factory
+      startBlock: 586000
+...
+```
+
 ### Creating a pull request
 
 > How to crate a pull request？
@@ -89,7 +112,7 @@ EOF
 
 1. We'll review the pull request and merge.
 2. Github action workflows execute deploy.
-3. You can view the execution results in Github action.
+3. You can view the execution results in github [action](https://github.com/FunctionX/fx-subgraph/actions).
 
 ### Subgraph endpoints
 
