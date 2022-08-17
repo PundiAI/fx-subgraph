@@ -119,17 +119,17 @@ dataSources:
 - mainet
   * Queries (HTTP): `https://graph-node.functionx.io/subgraphs/name/{subgraph name}`
   * Subscriptions (WS): `https://graph-node.functionx.io/ws/subgraphs/name/{subgraph name}`
-  * Subgraph indexing status: `https://graph-node.functionx.io/index-node`
+  * Subgraph indexing status: `https://graph-node-index.functionx.io`
 
 - testnet
   * Queries (HTTP): `https://testnet-graph-node.functionx.io/subgraphs/name/{subgraph name}`
   * Subscriptions (WS): `https://testnet-graph-node.functionx.io/ws/subgraphs/name/{subgraph name}`
-  * Subgraph indexing status: `https://testnet-graph-node.functionx.io/index-node`
+  * Subgraph indexing status: `https://testnet-graph-node-index.functionx.io`
   
 ### Checking subgraph health
 
   If a subgraph syncs successfully, that is a good sign that it will continue to run well forever. However, new triggers on the chain might cause your subgraph to hit an untested error condition or it may start to fall behind due to performance issues or issues with the node operators.
-  Graph Node exposes a graphql endpoint which you can query to check the status of your subgraph. On the Hosted Service, it is available at https://graph-node.functionx.io/index-node/graphql. On a local node, it is available on port 8030/graphql by default. The full schema for this endpoint can be found here. Here is an example query that checks the status of the current version of a subgraph:
+  Graph Node exposes a graphql endpoint which you can query to check the status of your subgraph. On the Hosted Service, it is available at https://graph-node-index.functionx.io/graphql. On a local node, it is available on port 8030/graphql by default. The full schema for this endpoint can be found here. Here is an example query that checks the status of the current version of a subgraph:
 ```
 {
   indexingStatusForCurrentVersion(subgraphName: "org/subgraph") {
