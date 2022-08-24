@@ -3,7 +3,7 @@
     "subgraph_name": "subgraphFXEVM_Blocks_mainnet",
     "network": "mainnet",
     "version": "v0.0.1",
-    "last_version": "v0.0.0",
+    "last_version": "v0.0.1",
     "branch": "main",
     "github_repo": "https://github.com/IsseiBlockchain/subgraph_blocks_mainnet"
   }
