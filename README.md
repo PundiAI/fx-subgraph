@@ -31,6 +31,8 @@ cd fx-subgraph
 
 > The `<subgraph name>.json` contains arrays of length less than or equal to 2; A test network and mainnet subgraph
 
+> The directory name and json file name must be the same as the subgraph name.
+
 ```shell
 mkdir <subgraph name>
 
