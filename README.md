@@ -134,7 +134,7 @@ dataSources:
   Graph Node exposes a graphql endpoint which you can query to check the status of your subgraph. On the Hosted Service, it is available at https://graph-node-index.functionx.io/graphql. On a local node, it is available on port 8030/graphql by default. The full schema for this endpoint can be found here. Here is an example query that checks the status of the current version of a subgraph:
 ```
 {
-  indexingStatusForCurrentVersion(subgraphName: "org/subgraph") {
+  indexingStatusForCurrentVersion(subgraphName: "subgraph name") {
     synced
     health
     fatalError {
