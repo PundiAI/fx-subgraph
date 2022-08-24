@@ -72,12 +72,16 @@ for subgraph in ${changeSubgraph}; do
         npx graph create --node "${graphNodeUrl}" ${subgraphName}
     fi
     npx graph deploy --ipfs "${ipfsUrl}" --node "${graphNodeUrl}" "${subgraphName}" > /dev/null 2>&1
-
-    echo "Deploying to Graph node"
-    echo "Deployed to $graphNodePubUrl/subgraphs/name/${subgraphName}/graphql"
-    echo "Subgraph endpoints:"
-    echo "Queries (HTTP): $graphNodePubUrl/subgraphs/name/${subgraphName}"
-    echo "Subscriptions (WS): $graphNodePubUrl/ws/subgraphs/name/${subgraphName}"
+    result=$?
+    if [ $result -eq 0 ] ; then
+      echo "Deploying to Graph node"
+      echo "Deployed to $graphNodePubUrl/subgraphs/name/${subgraphName}/graphql"
+      echo "Subgraph endpoints:"
+      echo "Queries (HTTP): $graphNodePubUrl/subgraphs/name/${subgraphName}"
+      echo "Subscriptions (WS): $graphNodePubUrl/ws/subgraphs/name/${subgraphName}"
+    else
+      echo "Failed to deploy ${subgraphName}!"
+    fi
     cd ..
   done
 done
