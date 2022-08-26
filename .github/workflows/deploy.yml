@@ -1,6 +1,6 @@
 name: Deploy Subgraph
 
-on: [workflow_dispatch]
+on: [pull_request_review, workflow_dispatch]
 
 jobs:
   build:
