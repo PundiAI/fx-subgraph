@@ -1,9 +1,9 @@
 name: Deploy Subgraph
 
-on: [pull_request_review, workflow_dispatch]
+on: [ pull_request_review, workflow_dispatch ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,6 @@ jobs:
 
       - name: deploy subgraph
         env:
-          GRAPH_AUTH_KEY: ${{ secrets.GRAPH_AUTH_KEY }}
           GRAPH_NODE_URL: ${{ secrets.GRAPH_NODE_URL }}
           GRAPH_IPFS_URL: ${{ secrets.GRAPH_IPFS_URL }}
           TESTNET_GRAPH_NODE_URL: ${{ secrets.TESTNET_GRAPH_NODE_URL }}
