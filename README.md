@@ -158,12 +158,6 @@ dataSources:
 ```
   This will give you the chainHeadBlock which you can compare with the latestBlock on your subgraph to check if it is running behind. synced informs if the subgraph has ever caught up to the chain. health can currently take the values of healthy if no errors occurred, or failed if there was an error which halted the progress of the subgraph. In this case, you can check the fatalError field for details on this error.
 
-### Subgraph archive policy
-  The Hosted Service is a free Graph Node indexer. Developers can deploy subgraphs indexing a range of networks, which will be indexed, and made available to query via graphQL.
-  To improve the performance of the service for active subgraphs, the Hosted Service will archive subgraphs that are inactive.
-  A subgraph is defined as "inactive" if it was deployed to the Hosted Service more than 45 days ago, and if it has received 0 queries in the last 30 days.
-  Developers can always redeploy an archived subgraph if it is required again.
-
 ## How do you deploy your own Graph Node
 
 - download docker-compose.yarm
