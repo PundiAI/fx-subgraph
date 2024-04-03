@@ -1,10 +1,10 @@
 [
   {
-    "subgraph_name": "subgraphFX2",
+    "subgraph_name": "subgraphMX",
     "network": "mainnet",
-    "version": "v0.0.3",
-    "last_version": "v0.0.3",
-    "branch": "main",
+    "version": "v0.0.1",
+    "last_version": "v0.0.0",
+    "branch": "addWhitelist",
     "github_repo": "https://github.com/FunctionX-SG/FXSwap-Analytics-Subgraph-Main"
   }
 ]
