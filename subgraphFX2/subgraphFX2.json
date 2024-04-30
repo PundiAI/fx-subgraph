@@ -3,7 +3,7 @@
     "subgraph_name": "subgraphFX2",
     "network": "mainnet",
     "version": "v0.0.4",
-    "last_version": "v0.0.3",
+    "last_version": "v0.0.4",
     "branch": "main",
     "github_repo": "https://github.com/FunctionX-SG/FXSwap-Analytics-Subgraph-Main"
   }
