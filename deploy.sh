@@ -2,6 +2,12 @@
 
 set -o errexit -o pipefail
 
+untracked_files="$(git ls-files --others --exclude-standard)"
+if [[ -n "${untracked_files}" && -d "./${untracked_files}" ]]; then
+  echo "untracked files: ./${untracked_files}"
+  rm -rf "./${untracked_files}"
+fi
+
 changeSubgraph=$(find . -name '*.json' -not -path "./node_modules/*" | grep '[_a-zA-Z0-9-]*.\/[_a-zA-Z0-9-]*.\.json')
 
 for subgraph in ${changeSubgraph}; do
