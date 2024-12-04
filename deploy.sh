@@ -2,6 +2,10 @@
 
 set -o errexit -o pipefail
 
+if [ "${1}" == "debug" ]; then
+  set -x
+fi
+
 untracked_files="$(git ls-files --others --exclude-standard)"
 if [[ -n "${untracked_files}" && -d "./${untracked_files}" ]]; then
   echo "untracked files: ./${untracked_files}"
@@ -58,10 +62,10 @@ for subgraph in ${changeSubgraph}; do
       githubRepo="${githubRepo%????}"
     fi
     branch=$(_jq '.branch')
-    curl --connect-timeout 3 -s https://raw.githubusercontent.com/"${githubRepo:19}"/"${branch}"/package.json | jq .
     if [ ! -d "${subgraphName}_${version}/.git" ]; then
       git clone -b "${branch}" "${githubRepo}" "${subgraphName}_${version}"
     fi
+    jq . "./${subgraphName}_${version}/package.json"
     cd "${subgraphName}_${version}" || exit 1
     echo "update ${subgraph}: form ${lastVersion} to ${version} in the ${network}"
     if [ -f "yarn.lock" ]; then
