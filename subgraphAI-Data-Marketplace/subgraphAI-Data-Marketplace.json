@@ -1,0 +1,10 @@
+[
+  {
+    "subgraph_name": "subgraphAI-Data-Marketplace",
+    "network": "testnet",
+    "version": "v0.0.1",
+    "last_version": "v0.0.0",
+    "branch": "testnet",
+    "github_repo": "https://github.com/FunctionX-SG/data-marketplace-subgraph"
+  }
+] 
